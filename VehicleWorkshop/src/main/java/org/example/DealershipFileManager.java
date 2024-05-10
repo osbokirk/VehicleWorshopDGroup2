@@ -13,6 +13,7 @@ public class DealershipFileManager {
     }
 
     public void saveVehicles(List<Vehicle> vehicles) {
+
         try {
             FileWriter writer = new FileWriter("vehicles.csv");
             for (Vehicle vehicle : vehicles){
@@ -22,6 +23,7 @@ public class DealershipFileManager {
         } catch (IOException e){
             e.printStackTrace();
         }
+
     }
 
     public void updateVehicle(Vehicle vehicle) {
@@ -42,6 +44,7 @@ public class DealershipFileManager {
         dealershipFileManager.saveVehicles(vehicles);
     }
 }
+
 
 class Car {
     private int vin;
@@ -70,4 +73,5 @@ class Car {
                 vin, year, make, model, type, color, mileage, price);
     }
 }
+
 
