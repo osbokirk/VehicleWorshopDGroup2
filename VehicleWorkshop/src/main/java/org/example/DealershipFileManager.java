@@ -13,7 +13,7 @@ public class DealershipFileManager {
 
     public void saveVehicles(List<Vehicle> vehicles) {
        try {
-           FileWriter writer = new FileWriter("vehicles.txt");
+           FileWriter writer = new FileWriter("vehicles.csv");
            for (Vehicle vehicle : vehicles){
                writer.write(vehicle.toString() + "\n");
 
@@ -33,7 +33,3 @@ public class DealershipFileManager {
 
     }
 }
-
-
-
-
