@@ -86,9 +86,21 @@ public class Dealership {
         return tempList;
     }
     public List<Vehicle> getVehiclesByType(String type){
-        List<Vehicle> tempList = inventory;
-        return tempList;
+        List<Vehicle> tempList = new ArrayList<>();
+        if (type != null && !type.isEmpty()) {
+            for (Vehicle x : inventory) {
+                if (x.getVehicleType().toLowerCase().equals(type.toLowerCase())) {
+                    tempList.add(x);
+                }
+            }
+            return tempList;
+        }
+        else {
+            return new ArrayList<>(inventory);
+        }
+
     }
+
     public List<Vehicle> getAllVehicles(){
         return inventory;
     }
