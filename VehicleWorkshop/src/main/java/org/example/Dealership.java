@@ -65,24 +65,55 @@ public class Dealership {
         this.inventory = inventory;
     }
 
-    public List<Vehicle> getVehiclesByPrice(int min, int max){
-        List<Vehicle> tempList = inventory;
+    public List<Vehicle> getVehiclesByPrice(double min,double max){
+        List<Vehicle> tempList = new ArrayList<>();
+        for (Vehicle x : inventory){
+            if (x.getPrice() <= max && x.getPrice() >= min){
+                tempList.add(x);
+            }
+        }
         return tempList;
     }
     public List<Vehicle> getVehiclesByMakeModel(String make,String model){
-        List<Vehicle> tempList = inventory;
+        ArrayList<Vehicle> tempList = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if (v.getMake().toLowerCase().contains(make)
+                    && v.getModel().toLowerCase().contains(model)){
+                tempList.add(v);
+            }
+        }
         return tempList;
     }
     public List<Vehicle> getVehiclesByYear(int min, int max){
-        List<Vehicle> tempList = inventory;
+        List<Vehicle> tempList = new ArrayList<>();
+        for (Vehicle x : inventory){
+            if (x.getYear() <= max && x.getYear() >= min){
+                tempList.add(x);
+            }
+        }
         return tempList;
     }
     public List<Vehicle> getVehiclesByColor(String color){
-        List<Vehicle> tempList = inventory;
-        return tempList;
+        List<Vehicle> tempList = new ArrayList<>();
+        if (color != null && !color.isEmpty()) {
+            for (Vehicle x : inventory) {
+                if (x.getVehicleType().toLowerCase().equals(color.toLowerCase())) {
+                    tempList.add(x);
+                }
+            }
+            return tempList;
+        }
+        else {
+            return new ArrayList<>(inventory);
+        }
     }
     public List<Vehicle> getVehiclesByMileage(int min,int max){
-        List<Vehicle> tempList = inventory;
+        List<Vehicle> tempList = new ArrayList<>();
+        for (Vehicle x : inventory){
+            if (x.getPrice() <= max && x.getPrice() >= min){
+                tempList.add(x);
+            }
+        }
         return tempList;
     }
     public List<Vehicle> getVehiclesByType(String type){
@@ -98,7 +129,6 @@ public class Dealership {
         else {
             return new ArrayList<>(inventory);
         }
-
     }
 
     public List<Vehicle> getAllVehicles(){
@@ -126,5 +156,12 @@ public class Dealership {
             System.out.println("Vehicle removed successfully.");
             // DealershipFileManager.save(); // Uncomment when FileManager is ready
         }
+    }
+    public String toString(){
+        String output = "";
+        for (Vehicle x : inventory){
+            output.concat(x.toString()+"\n");
+        }
+        return output;
     }
 }
