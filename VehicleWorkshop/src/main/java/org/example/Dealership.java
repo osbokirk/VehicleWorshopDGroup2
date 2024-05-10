@@ -93,9 +93,26 @@ public class Dealership {
         return inventory;
     }
     public void addVehicle(Vehicle vehicle){
+        if (vehicle == null){
+            System.out.println("Sorry, cannot add a null vehicle.");
+        }
+        else if (!inventory.contains(vehicle)){
+            System.out.println("Sorry, this vehicle is already in the inventory.");
+        }
+        else {
+            inventory.add(vehicle);
+            System.out.println("Vehicle added successfully");
+            // DealershipFileManager.Save(): // Uncomment when FileManager is ready
+        }
 
     }
-    public void removeVehicle(Vehicle vehicle){
-
+    public void removeVehicle(Vehicle vehicle) {
+        if (vehicle == null || !inventory.contains(vehicle)) {
+            System.out.println("Sorry, Vehicle Could Not be Found");
+        } else {
+            inventory.remove(vehicle);
+            System.out.println("Vehicle removed successfully.");
+            // DealershipFileManager.save(); // Uncomment when FileManager is ready
+        }
     }
 }
