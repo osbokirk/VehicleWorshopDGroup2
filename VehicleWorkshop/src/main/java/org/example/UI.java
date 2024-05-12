@@ -88,6 +88,10 @@ public class UI {
         System.out.println("input model");
         String model = scanner.nextLine();
 
+        for (Vehicle x: sorting.getVehiclesByMakeModel(make,model)) {
+            System.out.println(x);
+        }
+
     }
     private static void processGetByYearRequest(){
         Scanner scanner = new Scanner(System.in);
@@ -127,21 +131,59 @@ public class UI {
 
         System.out.println("input color");
         String color = scanner.nextLine();
+
+        for (Vehicle x: sorting.getVehiclesByColor(color)) {
+            System.out.println(x);
+        }
     }
     private static void processGetByMileageRequest(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("input odometer mileage");
-        int odometer = scanner.nextInt();
+        System.out.println("input mileage range prompt");
+        System.out.println("highest mileage");
+        String maxOdometerInput = scanner.nextLine();
+
+        System.out.println("lowest mileage");
+        String minOdometerInput = scanner.nextLine();
+
+        int maxOdometer = 999999;
+        int minOdometer = 0;
+
+        try {
+            if (!maxOdometerInput.isEmpty()){
+                maxOdometer = Integer.parseInt(maxOdometerInput);
+            }
+        }
+        catch (NumberFormatException ex){
+            System.out.println("not a numerical input prompt");
+        }
+
+        try {
+            if (!minOdometerInput.isEmpty()){
+                minOdometer = Integer.parseInt(minOdometerInput);
+            }
+        }
+        catch (NumberFormatException ex){
+            System.out.println("not a numerical input prompt");
+        }
+
+        System.out.println(sorting.getVehiclesByPrice(minOdometer,maxOdometer).toString());
     }
     private static void processGetByVehicleTypeRequest(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("input vehicle type");
         String vehicleType = scanner.nextLine();
+
+        for (Vehicle x: sorting.getVehiclesByType(vehicleType)) {
+            System.out.println(x);
+        }
     }
     private static void processAllVehicleRequest(){
-        Scanner scanner = new Scanner(System.in);
+        for(Vehicle x : sorting.getAllVehicles()){
+            System.out.println(x);
+        }
+
     }
     private static void processAddVehicleRequest(){
         Scanner scanner = new Scanner(System.in);
@@ -149,8 +191,6 @@ public class UI {
         while (true) {
 
             try {
-                Vehicle addVehicle = new Vehicle();
-
                 System.out.println("input vin");
                 int vin = Integer.parseInt(scanner.nextLine());
 
@@ -174,6 +214,8 @@ public class UI {
 
                 System.out.println("input price");
                 double price = Double.parseDouble(scanner.nextLine());
+
+                Vehicle addVehicle = new Vehicle(vin,year,model,make,color,vehicleType,odometer,price);
             }
             catch (NumberFormatException ex) {
                 System.out.println("need numerical input");
@@ -183,6 +225,18 @@ public class UI {
     }
     private static void processRemoveVehicleRequest(){
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("input vin being removed");
+        String vinInput = scanner.nextLine();
+        int vin = Integer.parseInt(vinInput);
+
+        boolean removed = false;
+        for(int x = 0; x < sorting.getAllVehicles().size() && removed == false; x++){
+            if (sorting.getAllVehicles().get(x).getVin() == vin) {
+                sorting.removeVehicle(sorting.getAllVehicles().get(x));
+                removed = true;
+            }
+        }
     }
 
 
