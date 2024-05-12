@@ -7,7 +7,7 @@ public class Dealership {
     private String name;
     private String address;
     private String phone;
-    private ArrayList<Vehicle> inventory ;
+    private ArrayList<Vehicle> inventory = new ArrayList<>() ;
     //comment out below lines when FileManager Class is Complete
     Vehicle a = new Vehicle(10000,1993,"Ford","Explore","Suv","Red",525123,995.00);
     Vehicle b = new Vehicle(37846,2001,"Ford","Ranger","truck","Yellow",172544,1995.00);
@@ -77,8 +77,8 @@ public class Dealership {
     public List<Vehicle> getVehiclesByMakeModel(String make,String model){
         ArrayList<Vehicle> tempList = new ArrayList<>();
         for(Vehicle v : inventory){
-            if (v.getMake().toLowerCase().contains(make)
-                    && v.getModel().toLowerCase().contains(model)){
+            if (v.getMake().toLowerCase().contains(make.toLowerCase())
+                    && v.getModel().toLowerCase().contains(model.toLowerCase())){
                 tempList.add(v);
             }
         }
@@ -162,6 +162,7 @@ public class Dealership {
         for (Vehicle x : inventory){
             output.concat(x+"\n");
         }
+
         return output;
     }
 }
