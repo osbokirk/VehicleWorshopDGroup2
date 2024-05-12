@@ -27,6 +27,7 @@ public class UI {
 //    }
 
     public static void homeScreen(){
+        sorting = DealershipFileManager.getDealership();
         while (true){
             System.out.println("home screen prompt");
 
@@ -77,7 +78,10 @@ public class UI {
             System.out.println("not a numerical input prompt");
         }
 
-        System.out.println(sorting.getVehiclesByPrice(minPrice,maxPrice).toString());
+        //System.out.println(sorting.getVehiclesByPrice(minPrice,maxPrice).toString());
+        for (Vehicle x: sorting.getVehiclesByPrice(minPrice,maxPrice)) {
+            System.out.println(x);
+        }
     }
     private static void processGetByMakeModelRequest(){
         Scanner scanner = new Scanner(System.in);
@@ -124,7 +128,10 @@ public class UI {
             System.out.println("not a numerical input prompt");
         }
 
-        System.out.println(sorting.getVehiclesByPrice(minYear,maxYear).toString());
+        //System.out.println(sorting.getVehiclesByYear(minYear,maxYear).toString());
+        for (Vehicle x: sorting.getVehiclesByYear(minYear,maxYear)) {
+            System.out.println(x);
+        }
     }
     private static void processGetByColorRequest(){
         Scanner scanner = new Scanner(System.in);
@@ -167,7 +174,10 @@ public class UI {
             System.out.println("not a numerical input prompt");
         }
 
-        System.out.println(sorting.getVehiclesByPrice(minOdometer,maxOdometer).toString());
+        //System.out.println(sorting.getVehiclesByMileage(minOdometer,maxOdometer).toString());
+        for (Vehicle x: sorting.getVehiclesByMileage(minOdometer,maxOdometer)) {
+            System.out.println(x);
+        }
     }
     private static void processGetByVehicleTypeRequest(){
         Scanner scanner = new Scanner(System.in);
@@ -216,6 +226,7 @@ public class UI {
                 double price = Double.parseDouble(scanner.nextLine());
 
                 Vehicle addVehicle = new Vehicle(vin,year,model,make,color,vehicleType,odometer,price);
+                sorting.addVehicle(addVehicle);
             }
             catch (NumberFormatException ex) {
                 System.out.println("need numerical input");
