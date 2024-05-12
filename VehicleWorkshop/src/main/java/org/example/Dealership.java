@@ -160,7 +160,7 @@ public class Dealership {
     public String toString(){
         String output = "";
         for (Vehicle x : inventory){
-            output.concat(x.toString()+"\n");
+            output.concat(x+"\n");
         }
         return output;
     }
