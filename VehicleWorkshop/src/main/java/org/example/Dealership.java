@@ -7,7 +7,9 @@ public class Dealership {
     private String name;
     private String address;
     private String phone;
-    private ArrayList<Vehicle> inventory = new ArrayList<>() ;
+
+    private ArrayList<Vehicle> inventory = new ArrayList<>();
+
     //comment out below lines when FileManager Class is Complete
     Vehicle a = new Vehicle(10000,1993,"Ford","Explore","Suv","Red",525123,995.00);
     Vehicle b = new Vehicle(37846,2001,"Ford","Ranger","truck","Yellow",172544,1995.00);
