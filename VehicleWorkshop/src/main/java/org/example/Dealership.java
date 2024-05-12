@@ -11,9 +11,9 @@ public class Dealership {
     private ArrayList<Vehicle> inventory = new ArrayList<>();
 
     //comment out below lines when FileManager Class is Complete
-    Vehicle a = new Vehicle(10000,1993,"Ford","Explore","Suv","Red",525123,995.00);
-    Vehicle b = new Vehicle(37846,2001,"Ford","Ranger","truck","Yellow",172544,1995.00);
-    Vehicle c = new Vehicle (44901,2012,"Honda","Civic","SUV","Gray",103221,6995.00);
+    //Vehicle a = new Vehicle(10000,1993,"Ford","Explore","Suv","Red",525123,995.00);
+    //Vehicle b = new Vehicle(37846,2001,"Ford","Ranger","truck","Yellow",172544,1995.00);
+    //Vehicle c = new Vehicle (44901,2012,"Honda","Civic","SUV","Gray",103221,6995.00);
 
 
 
@@ -26,11 +26,11 @@ public class Dealership {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        //this.inventory = FileManganager.getDealership();
+        //this.inventory = DealershipFileManager.getDealership().getInventory();
         //comment out below when FileManager Class is Complete
-        inventory.add(a);
-        inventory.add(b);
-        inventory.add(c);
+        //inventory.add(a);
+        //inventory.add(b);
+        //inventory.add(c);
 
 
     }

@@ -235,7 +235,7 @@ public class UI {
             catch (NumberFormatException ex) {
                 System.out.println("need numerical input");
             }
-            DealershipFileManager.saveVehicles(sorting);
+            DealershipFileManager.saveDealership(sorting);
             homeScreen();
         }
     }
@@ -253,7 +253,7 @@ public class UI {
                 removed = true;
             }
         }
-        DealershipFileManager.saveVehicles(sorting);
+        DealershipFileManager.saveDealership(sorting);
     }
 
 

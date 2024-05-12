@@ -3,7 +3,6 @@ package org.example;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 
 public class DealershipFileManager {
 
@@ -13,7 +12,7 @@ public class DealershipFileManager {
         this.dealershipName = dealershipName;
     }
 
-    public static void saveVehicles(Dealership dealership) {
+    public static void saveDealership(Dealership dealership) {
 
         try {
             FileWriter writer = new FileWriter("src/main/resources/inventory.csv");
