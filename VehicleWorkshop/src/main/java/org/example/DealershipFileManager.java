@@ -22,7 +22,7 @@ public class DealershipFileManager {
             for (Vehicle x : dealership.getAllVehicles()){
                 writer.write(x + "\n");
             }
-            writer.close();
+            writer.close( );
         } catch (IOException e){
             e.printStackTrace();
         }
