@@ -19,9 +19,9 @@ public class DealershipFileManager {
             BufferedWriter writer1 = new BufferedWriter(writer);
             writer1.write(dealership.getName()+"\\|"+dealership.getAddress()+"\\|"+dealership.getPhone()+"\n");
             for (Vehicle x : dealership.getAllVehicles()){
-                writer.write(x + "\n");
+                writer1.write(x + "\n");
             }
-            writer.close( );
+            writer1.close( );
         } catch (IOException e){
             e.printStackTrace();
         }
