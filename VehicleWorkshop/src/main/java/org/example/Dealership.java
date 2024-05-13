@@ -141,11 +141,13 @@ public class Dealership {
             System.out.println("Sorry, cannot add a null vehicle.");
         }
         else if (!inventory.contains(vehicle)){
-            System.out.println("Sorry, this vehicle is already in the inventory.");
-        }
-        else {
             inventory.add(vehicle);
             System.out.println("Vehicle added successfully");
+
+        }
+        else {
+
+            System.out.println("Sorry, this vehicle is already in the inventory.");
             // DealershipFileManager.Save(): // Uncomment when FileManager is ready
         }
 
