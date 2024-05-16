@@ -16,6 +16,7 @@ public class UI {
             System.out.println("""
                     Welcome to the ̵̴̨͚̥̙̘̫̭̥̰͓͓̩̭̙̦̩̰̟͇̼̖̺͓̰̦̪̫͎̺͚̗͔̠͚̾̉͐̒̓̽̊͐̋͋̅̓͛̊̍̓͋̂̏͑͑̆͗̔͂́̈́͜͠͝ͅDealership
                     Please select from the following options.
+                    0.)Sell vehicle
                     1.)Filter vehicles by price
                     2.)Filter vehicles by make and model
                     3.)Filter vehicles by year
@@ -25,10 +26,11 @@ public class UI {
                     7.)Show all vehicles
                     8.)Add a vehicle
                     9.)Remove a Vehicle
-                    0.)Exit software
+                    10.)Exit software
                     """);
 
             switch (userInput().toLowerCase()){
+                case"0"->sellVehicles();
                 case"1"-> processGetByPriceRequest();
                 case"2"-> processGetByMakeModelRequest();
                 case"3"-> processGetByYearRequest();
@@ -38,7 +40,7 @@ public class UI {
                 case"7"-> processAllVehicleRequest();
                 case"8"-> processAddVehicleRequest();
                 case"9"-> processRemoveVehicleRequest();
-                case"0"-> System.exit(0);
+                case"10"-> System.exit(0);
                 default-> System.out.println("Please select from the menu using the numerical values listed");
             }
         }
@@ -251,6 +253,75 @@ public class UI {
             }
         }
         DealershipFileManager.saveDealership(sorting);
+    }
+
+
+    private static void sellVehicles(){
+        System.out.println("Please Enter The Vin Of The Vehicle You'd Like To Sell");
+        int vin = (int) Integer.parseInt(userInput());
+        int invIndex;
+        boolean found = false;
+        for(invIndex = 0;invIndex<sorting.getAllVehicles().size() && found == false;invIndex++){
+            if (sorting.getInventory().get(invIndex).getVin() == vin){
+                found =true;
+            }
+        }
+        if (found == false){
+            System.out.println("Unable To Locate The Vehicle");
+        }else{
+            contractPicker();
+        }
+    }
+    private static void contractPicker(){
+        System.out.println("""
+                1) Buy
+                2) Finance
+                3) Lease
+                Which Options Would You Like""");
+        switch (userInput()){
+            case "1":
+                System.out.println("//purchaseContract");
+                comfirmDeal();
+                homeScreen();
+            case "2":
+                System.out.println("//financeContract");
+                comfirmDeal();
+                homeScreen();
+            case "3":
+                System.out.println("//leaseContract");
+                comfirmDeal();
+                homeScreen();
+            default:
+                System.out.println("Sorry Didn't Under Stand that");
+                contractPicker();
+        }
+    }
+
+    private static void buyContact(){
+       // userInput();
+       // userInput();
+       // userInput();
+       // userInput();
+       // userInput();
+       // userInput();
+    }
+    private static void finaceContract(){
+
+    }
+    private static void leaseContract(){
+
+    }
+    private static void comfirmDeal(){
+        System.out.println("does this looks good to you");
+        System.out.println("contract.to String");
+        String input = userInput();
+        if (input.equals("y")||input.equals("yes")){
+            System.out.println("Dealership.save Contract");
+            System.out.println("Dealership.remove()");
+            System.out.println("Bang Good Job");
+        }else{
+            System.out.println("No Worries We Got Another |]_#@!#$ With You're Name On It");
+        }
     }
 
 

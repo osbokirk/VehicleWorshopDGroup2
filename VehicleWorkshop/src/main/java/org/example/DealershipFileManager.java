@@ -13,7 +13,6 @@ public class DealershipFileManager {
     }
 
     public static void saveDealership(Dealership dealership) {
-
         try {
             FileWriter writer = new FileWriter("src/main/resources/inventory.csv");
             BufferedWriter writer1 = new BufferedWriter(writer);
@@ -25,7 +24,6 @@ public class DealershipFileManager {
         } catch (IOException e){
             e.printStackTrace();
         }
-
     }
 
     public static Dealership getDealership(){
@@ -40,33 +38,13 @@ public class DealershipFileManager {
                 cars.add(new Vehicle(Integer.parseInt(values[0]),Integer.parseInt(values[1]),values[2],values[3],values[4],values[5],Integer.parseInt(values[6]),Double.parseDouble(values[7])));
             }
             dealership.setInventory(cars);
-
             return dealership;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-    public void updateVehicle(Vehicle vehicle) {
-
-    }
-
-    public void deleteVehicle(int vin) {
-
-    }
-
-//    public static void main(String[] args) {
-//        // Test saving vehicles
-//        DealershipFileManager dealershipFileManager = new DealershipFileManager("ABC Dealership");
-//        List<Vehicle> vehicles = new ArrayList<>();
-//        vehicles.add(new Vehicle(10112, 1993, "Ford", "Explorer", "SUV", "Red", 525123, 995.00));
-//        vehicles.add(new Vehicle(37846, 2001, "Ford", "Ranger", "truck", "Yellow", 172544, 1995.00));
-//        vehicles.add(new Vehicle(44901, 2012, "Honda", "Civic", "SUV", "Gray", 103221, 6995.00));
-//        //dealershipFileManager.saveVehicles(vehicles);
-//    }
 }
 
 
