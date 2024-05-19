@@ -1,5 +1,7 @@
 package org.example;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UI {
@@ -264,15 +266,16 @@ public class UI {
         for(invIndex = 0;invIndex<sorting.getAllVehicles().size() && found == false;invIndex++){
             if (sorting.getInventory().get(invIndex).getVin() == vin){
                 found =true;
+
             }
         }
         if (found == false){
             System.out.println("Unable To Locate The Vehicle");
         }else{
-            contractPicker();
+            contractPicker(sorting.getInventory().get(invIndex-1));
         }
     }
-    private static void contractPicker(){
+    private static void contractPicker(Vehicle vehicle){
         System.out.println("""
                 1) Buy
                 2) Finance
@@ -280,49 +283,58 @@ public class UI {
                 Which Options Would You Like""");
         switch (userInput()){
             case "1":
-                System.out.println("//purchaseContract");
-                comfirmDeal();
+                buyContact(vehicle);
+                //comfirmDeal();
                 homeScreen();
             case "2":
-                System.out.println("//financeContract");
-                comfirmDeal();
+                finaceContract(vehicle);
+                //comfirmDeal();
                 homeScreen();
             case "3":
-                System.out.println("//leaseContract");
-                comfirmDeal();
+                leaseContract(vehicle);
+                //comfirmDeal();
                 homeScreen();
             default:
                 System.out.println("Sorry Didn't Under Stand that");
-                contractPicker();
+                contractPicker(vehicle);
         }
     }
-
-    private static void buyContact(){
-       // userInput();
-       // userInput();
-       // userInput();
-       // userInput();
-       // userInput();
-       // userInput();
+    private static void buyContact(Vehicle vehicle){
+      //is finaced ==false;
+        List<String> info =startContract();
+        SalesContract x = new SalesContract(info.get(0),info.get(1),info.get(2),vehicle,false);
+        comfirmDeal(x);
     }
-    private static void finaceContract(){
-
+    private static void finaceContract(Vehicle vehicle){
+        List<String> info = startContract();
+        SalesContract  x = new SalesContract(info.get(0),info.get(1),info.get(2),vehicle,true);
+        comfirmDeal(x);
     }
-    private static void leaseContract(){
-
+    private static void leaseContract(Vehicle vehicle){
+        List<String> info = startContract();
+        LeaseContract x = new LeaseContract(info.get(0),info.get(1),info.get(2),vehicle);
+        comfirmDeal(x);
     }
-    private static void comfirmDeal(){
-        System.out.println("does this looks good to you");
-        System.out.println("contract.to String");
+    private static void comfirmDeal(Contract contract) {
+        System.out.println("Does This Looks Good To You");
+        System.out.println(contract);
         String input = userInput();
-        if (input.equals("y")||input.equals("yes")){
-            System.out.println("Dealership.save Contract");
-            System.out.println("Dealership.remove()");
-            System.out.println("Bang Good Job");
-        }else{
+        if (input.equals("y") || input.equals("yes")) {
+            ContractDataManager.saveContract(contract);
+            sorting.removeVehicle(contract.getVehicleSold());
+            DealershipFileManager.saveDealership(sorting);
+            System.out.println("*Bang* Good Job");
+        } else {
             System.out.println("No Worries We Got Another |]_#@!#$ With You're Name On It");
         }
     }
-
-
+    public static List<String> startContract(){
+        List<String> inputs = new ArrayList<>();
+        inputs.add((LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)).toString().replaceAll("-","")) ;
+        System.out.println("Please Enter Your Name:");
+        inputs.add(userInput());
+        System.out.println("Please Enter Your Email:");
+        inputs.add(userInput());
+        return inputs;
+    }
 }
