@@ -1,5 +1,6 @@
 package org.example;
 
+
 public abstract class Contract {
     public String date;
     public String customerName;

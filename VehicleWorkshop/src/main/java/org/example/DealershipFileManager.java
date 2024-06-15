@@ -35,7 +35,7 @@ public class DealershipFileManager {
             String carValues;
             while((carValues = reader.readLine()) != null){
                 String[] values = carValues.split("\\|");
-                cars.add(new Vehicle(Integer.parseInt(values[0]),Integer.parseInt(values[1]),values[2],values[3],values[4],values[5],Integer.parseInt(values[6]),Double.parseDouble(values[7])));
+                cars.add(new Vehicle(values[0],Integer.parseInt(values[1]),values[2],values[3],values[4],values[5],Integer.parseInt(values[6]),Double.parseDouble(values[7])));
             }
             dealership.setInventory(cars);
             return dealership;

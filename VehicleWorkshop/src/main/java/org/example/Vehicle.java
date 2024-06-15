@@ -1,7 +1,7 @@
 package org.example;
 
 public class Vehicle {
-    private int vin;
+    private String vin;
     private int year;
     private String model; 
     private String make;
@@ -10,7 +10,7 @@ public class Vehicle {
     private int odometer;
     private double price;
 
-    public Vehicle(int vin, int year, String make, String model, String vehicleType,String color , int odometer, double price) {
+    public Vehicle(String vin, int year, String make, String model, String vehicleType,String color , int odometer, double price) {
         this.vin = vin;
         this.year = year;
         this.model = model;
@@ -21,11 +21,11 @@ public class Vehicle {
         this.price = price;
     }
 
-    public int getVin() {
+    public String getVin() {
         return vin;
     }
 
-    public void setVin(int vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
@@ -85,7 +85,7 @@ public class Vehicle {
         this.price = price;
     }
     public String toString() {
-        return String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+        return String.format("%s|%d|%s|%s|%s|%s|%d|%.2f",
                 vin, year, make, model, vehicleType, color, odometer, price);
     }
 }

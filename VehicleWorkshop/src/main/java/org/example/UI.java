@@ -7,12 +7,23 @@ import java.util.*;
 public class UI {
 
     private static Dealership sorting;
+    private String Location ="jdbc:mysql://localhost:3306/northwind";
+    private ContractRepository conRep;
+    private DealershipRepository dealRep;
+
+
     public static String userInput(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+    public UI(String root, String word){
+         conRep = new ContractRepository(Location,root,word);
+         dealRep = new DealershipRepository(Location,root,word);
+         homeScreen();
+    }
 
     public static void homeScreen(){
+
         sorting = DealershipFileManager.getDealership();
         while (true){
             System.out.println("""
@@ -208,7 +219,7 @@ public class UI {
 
             try {
                 System.out.println("Input VIN");
-                int vin = Integer.parseInt(scanner.nextLine());
+                String vin = scanner.nextLine();
 
                 System.out.println("Input year");
                 int year = Integer.parseInt(scanner.nextLine());
@@ -249,7 +260,7 @@ public class UI {
 
         boolean removed = false;
         for(int x = 0; x < sorting.getAllVehicles().size() && removed == false; x++){
-            if (sorting.getAllVehicles().get(x).getVin() == vin) {
+            if (sorting.getAllVehicles().get(x).getVin().equals(vin)){
                 sorting.removeVehicle(sorting.getAllVehicles().get(x));
                 removed = true;
             }
@@ -264,7 +275,7 @@ public class UI {
         int invIndex;
         boolean found = false;
         for(invIndex = 0;invIndex<sorting.getAllVehicles().size() && found == false;invIndex++){
-            if (sorting.getInventory().get(invIndex).getVin() == vin){
+            if (sorting.getInventory().get(invIndex).getVin().equals(vin) ){
                 found =true;
 
             }

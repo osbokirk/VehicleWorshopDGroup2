@@ -74,4 +74,32 @@ public class SalesContract extends Contract {
     }//"SALE"|Date|CustomerName|CustomerEmail
     //vehicle tostring
     //sales tax|recording fee|processing fee|total|fiance|monthly payment
+
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public double getProcessingFee() {
+        return processingFee;
+    }
+
+    public boolean isFinanced() {
+        return isFinanced;
+    }
+
+    public double getRecordingFee() {
+        return recordingFee;
+    }
+
+    public double getSalesTaxAmmount() {
+        return salesTaxAmmount;
+    }
+
+    public double getIntrestRate() {
+        return intrestRate;
+    }
+
+    public int getTermLenght() {
+        return termLenght;
+    }
 }

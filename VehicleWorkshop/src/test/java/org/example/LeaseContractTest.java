@@ -12,7 +12,7 @@ class LeaseContractTest {
     @Test
     void getTotalPrice() {
         //arrange
-        Vehicle car = new Vehicle(1,1997,"","","","",0,2000);
+        Vehicle car = new Vehicle("1",1997,"","","","",0,2000);
         LeaseContract x = new LeaseContract("now","kirk","Email",car);
         //act
         double value = x.getTotalPrice();
@@ -23,7 +23,7 @@ class LeaseContractTest {
     @Test
     void getMonthlyPayment() {
         //arrange
-        Vehicle car = new Vehicle(1,1997,"","","","",0,31995.00);
+        Vehicle car = new Vehicle("1",1997,"","","","",0,31995.00);
         LeaseContract x = new LeaseContract("now","kirk","Email",car);
         //act
         //assert
