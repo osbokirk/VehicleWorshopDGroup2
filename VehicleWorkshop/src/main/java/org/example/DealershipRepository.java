@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DealershipRepository {
     private BasicDataSource basicDataSource;
-    public DealershipRepository (String url,String userName,String password){
+    public  DealershipRepository (String url,String userName,String password){
         basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(url);
         basicDataSource.setUsername(userName);
@@ -46,12 +46,12 @@ public class DealershipRepository {
             ex.printStackTrace();
         }
     }
-    public List<Vehicle> ByPriceRange(int minVal, int maxVal, int dealershipId){
+    public List<Vehicle> ByPriceRange(double minVal, double maxVal, int dealershipId){
         String preparedStatement ="{Call VehicleByPrice(?,?,?)}";
         List<Vehicle> vehicleList = new ArrayList<>();
         try (Connection connection = basicDataSource.getConnection();CallableStatement query = connection.prepareCall(preparedStatement)){
-            query.setInt(1,minVal);
-            query.setInt(2,maxVal);
+            query.setDouble(1,minVal);
+            query.setDouble(2,maxVal);
             query.setInt(3,dealershipId);
             ResultSet resultSet = query.executeQuery();
             while (resultSet.next()){
@@ -190,6 +190,29 @@ public class DealershipRepository {
                 Vehicle vehicle =  new Vehicle(vin,modelYear,make,model,vehicleType,color,odometer,price);
                 vehicleList.add(vehicle);
             }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return vehicleList;
+    }
+    public List<Vehicle> GetAll(int DealershipId){
+        String preparedStatement = "{Call GetAllVehicles(?,?)}";
+        List<Vehicle> vehicleList = new ArrayList<>();
+        try (Connection connection = basicDataSource.getConnection();CallableStatement query = connection.prepareCall(preparedStatement)){
+            query.setInt(1,DealershipId);
+            ResultSet resultSet = query.executeQuery();
+        while (resultSet.next()){
+            String vin = resultSet.getString("Vin");
+            int modelYear= resultSet.getInt("ModelYear");
+            String model = resultSet.getString("Model");
+            String make = resultSet.getString("Make");
+            String vehicleType = resultSet.getString("VehicleType");
+            String color = resultSet.getString("Color");
+            int odometer = resultSet.getInt("Odometer");
+            double price = resultSet.getFloat("Price");
+            Vehicle vehicle =  new Vehicle(vin,modelYear,make,model,vehicleType,color,odometer,price);
+            vehicleList.add(vehicle);
+        }
         }catch (SQLException ex){
             ex.printStackTrace();
         }

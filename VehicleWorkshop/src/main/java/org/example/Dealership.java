@@ -7,32 +7,17 @@ public class Dealership {
     private String name;
     private String address;
     private String phone;
-
-    private ArrayList<Vehicle> inventory = new ArrayList<>();
-
-    //comment out below lines when FileManager Class is Complete
-    //Vehicle a = new Vehicle(10000,1993,"Ford","Explore","Suv","Red",525123,995.00);
-    //Vehicle b = new Vehicle(37846,2001,"Ford","Ranger","truck","Yellow",172544,1995.00);
-    //Vehicle c = new Vehicle (44901,2012,"Honda","Civic","SUV","Gray",103221,6995.00);
+    private int DealershipID = 1;//should point to a specific dealership in database
+    private DealershipRepository dealershipRepository = new DealershipRepository( "jdbc:mysql://localhost:3306/dealership","root","YUm15510n");
 
 
 
 
-
-
-
-
+    //for multi dealership use add dealershipID to constructor
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        //this.inventory = DealershipFileManager.getDealership().getInventory();
-        //comment out below when FileManager Class is Complete
-        //inventory.add(a);
-        //inventory.add(b);
-        //inventory.add(c);
-
-
     }
 
     public String getName() {
@@ -59,91 +44,93 @@ public class Dealership {
         this.phone = phone;
     }
 
-    public ArrayList<Vehicle> getInventory() {
-        return inventory;
-    }
 
-    public void setInventory(ArrayList<Vehicle> inventory) {
-        this.inventory = inventory;
-    }
+
+
 
     public List<Vehicle> getVehiclesByPrice(double min,double max){
-        List<Vehicle> tempList = new ArrayList<>();
-        for (Vehicle x : inventory){
-            if (x.getPrice() <= max && x.getPrice() >= min){
-                tempList.add(x);
-            }
-        }
-        return tempList;
+//        List<Vehicle> tempList = new ArrayList<>();
+//        for (Vehicle x : inventory){
+//            if (x.getPrice() <= max && x.getPrice() >= min){
+//                tempList.add(x);
+//            }
+//        }
+//        return tempList;
+        return dealershipRepository.ByPriceRange(min,max,DealershipID);
     }
     public List<Vehicle> getVehiclesByMakeModel(String make,String model){
-        ArrayList<Vehicle> tempList = new ArrayList<>();
-        for(Vehicle v : inventory){
-            if (v.getMake().toLowerCase().contains(make.toLowerCase())
-                    && v.getModel().toLowerCase().contains(model.toLowerCase())){
-                tempList.add(v);
-            }
-        }
-        return tempList;
+//        ArrayList<Vehicle> tempList = new ArrayList<>();
+//        for(Vehicle v : inventory){
+//            if (v.getMake().toLowerCase().contains(make.toLowerCase())
+//                    && v.getModel().toLowerCase().contains(model.toLowerCase())){
+//                tempList.add(v);
+//            }
+//        }
+//        return tempList;
+        return dealershipRepository.ByMakeModel(make,model,DealershipID);
     }
     public List<Vehicle> getVehiclesByYear(int min, int max){
-        List<Vehicle> tempList = new ArrayList<>();
-        for (Vehicle x : inventory){
-            if (x.getYear() <= max && x.getYear() >= min){
-                tempList.add(x);
-            }
-        }
-        return tempList;
+//        List<Vehicle> tempList = new ArrayList<>();
+//        for (Vehicle x : inventory){
+//            if (x.getYear() <= max && x.getYear() >= min){
+//                tempList.add(x);
+//            }
+//        }
+//        return tempList;
+        return dealershipRepository.ByYear(min,max,DealershipID);
     }
     public List<Vehicle> getVehiclesByColor(String color){
-        List<Vehicle> tempList = new ArrayList<>();
-        if (color != null && !color.isEmpty()) {
-            for (Vehicle x : inventory) {
-                if (x.getVehicleType().toLowerCase().equals(color.toLowerCase())) {
-                    tempList.add(x);
-                }
-            }
-            return tempList;
-        }
-        else {
-            return new ArrayList<>(inventory);
-        }
+//        List<Vehicle> tempList = new ArrayList<>();
+//        if (color != null && !color.isEmpty()) {
+//            for (Vehicle x : inventory) {
+//                if (x.getVehicleType().toLowerCase().equals(color.toLowerCase())) {
+//                    tempList.add(x);
+//                }
+//            }
+//            return tempList;
+//        }
+//        else {
+//            return new ArrayList<>(inventory);
+//        }
+        return dealershipRepository.ByColor(color,DealershipID);
     }
     public List<Vehicle> getVehiclesByMileage(int min,int max){
-        List<Vehicle> tempList = new ArrayList<>();
-        for (Vehicle x : inventory){
-            if (x.getPrice() <= max && x.getPrice() >= min){
-                tempList.add(x);
-            }
-        }
-        return tempList;
+//        List<Vehicle> tempList = new ArrayList<>();
+//        for (Vehicle x : inventory){
+//            if (x.getPrice() <= max && x.getPrice() >= min){
+//                tempList.add(x);
+//            }
+//        }
+//        return tempList;
+        return dealershipRepository.ByMileage(min,max,DealershipID);
     }
     public List<Vehicle> getVehiclesByType(String type){
-        List<Vehicle> tempList = new ArrayList<>();
-        if (type != null && !type.isEmpty()) {
-            for (Vehicle x : inventory) {
-                if (x.getVehicleType().toLowerCase().equals(type.toLowerCase())) {
-                    tempList.add(x);
-                }
-            }
-            return tempList;
-        }
-        else {
-            return new ArrayList<>(inventory);
-        }
+//        List<Vehicle> tempList = new ArrayList<>();
+//        if (type != null && !type.isEmpty()) {
+//            for (Vehicle x : inventory) {
+//                if (x.getVehicleType().toLowerCase().equals(type.toLowerCase())) {
+//                    tempList.add(x);
+//                }
+//            }
+//            return tempList;
+//        }
+//        else {
+//            return new ArrayList<>(inventory);
+//        }
+        return dealershipRepository.ByType(type,DealershipID);
     }
 
     public List<Vehicle> getAllVehicles(){
-        return inventory;
+        return dealershipRepository.GetAll(DealershipID);
     }
     public void addVehicle(Vehicle vehicle){
         if (vehicle == null){
             System.out.println("Sorry, cannot add a null vehicle.");
         }
-        else if (!inventory.contains(vehicle)){
-            inventory.add(vehicle);
+        else if (!dealershipRepository.GetAll(DealershipID).contains(vehicle)){
+            //inventory.add(vehicle);
+            dealershipRepository.addVehicle(vehicle,DealershipID);
             System.out.println("Vehicle added successfully");
-
         }
         else {
 
@@ -153,17 +140,18 @@ public class Dealership {
 
     }
     public void removeVehicle(Vehicle vehicle) {
-        if (vehicle == null || !inventory.contains(vehicle)) {
+        if (vehicle == null || !dealershipRepository.GetAll(DealershipID).contains(vehicle)) {
             System.out.println("Sorry, Vehicle Could Not be Found");
         } else {
-            inventory.remove(vehicle);
+            //inventory.remove(vehicle);
+            dealershipRepository.removeVehicle(vehicle);
             System.out.println("Vehicle removed successfully.");
             // DealershipFileManager.save(); // Uncomment when FileManager is ready
         }
     }
     public String toString(){
         String output = "";
-        for (Vehicle x : inventory){
+        for (Vehicle x : dealershipRepository.GetAll(DealershipID)){
             output.concat(x+"\n");
         }
 

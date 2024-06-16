@@ -24,7 +24,7 @@ public class UI {
 
     public static void homeScreen(){
 
-        sorting = DealershipFileManager.getDealership();
+        //sorting = DealershipFileManager.getDealership();
         while (true){
             System.out.println("""
                     Welcome to the ̵̴̨͚̥̙̘̫̭̥̰͓͓̩̭̙̦̩̰̟͇̼̖̺͓̰̦̪̫͎̺͚̗͔̠͚̾̉͐̒̓̽̊͐̋͋̅̓͛̊̍̓͋̂̏͑͑̆͗̔͂́̈́͜͠͝ͅDealership
@@ -69,12 +69,12 @@ public class UI {
         System.out.println("Lowest price");
         String minPriceInput = scanner.nextLine();
 
-        Double maxPrice = 9999999.00;
-        Double minPrice = 0.00;
+        Integer maxPrice = 9999999;
+        Integer minPrice = 0;
 
         try {
             if (!maxPriceInput.isEmpty()){
-                maxPrice = Double.parseDouble(maxPriceInput);
+                maxPrice = Integer.parseInt(maxPriceInput);
             }
         }
         catch (NumberFormatException ex){
@@ -83,7 +83,7 @@ public class UI {
 
         try {
             if (!minPriceInput.isEmpty()){
-                minPrice = Double.parseDouble(minPriceInput);
+                minPrice = Integer.parseInt(minPriceInput);
             }
         }
         catch (NumberFormatException ex){
@@ -247,7 +247,7 @@ public class UI {
             }
             catch (NumberFormatException ex) {
                 System.out.println("Not a numerical input. Sending back to h̵̙̮̫̮͖̋̈́̉͝ờ̵̱̰̜̤̯̳͔͍̪̯̙̻̃̈́̀̒̀̆̚͝͠ͅm̵̼͙̖̿͜ͅè̴̮̟̩̦͕͒̐S̶̡̹̤̝̃̑́̀̉̆̓͛̐͘͝c̶̹͑͊̇̑̇͌͠r̵̨̨̻̙̹̼̅͆́̍͒͛̚͜e̶̢̟͈͙͙͚͎̅̉̍̍͂͗͠͝ͅe̸̹̹̞͐͛̈́̀̅̈͗̋̐͋͑̃n̸̬̜͔̗̪̻̐̏̎̿̉̇̓̃̽͗̚̚͠͝!");            }
-            DealershipFileManager.saveDealership(sorting);
+            //DealershipFileManager.saveDealership(sorting);
             homeScreen();
         }
     }
@@ -265,7 +265,7 @@ public class UI {
                 removed = true;
             }
         }
-        DealershipFileManager.saveDealership(sorting);
+        //DealershipFileManager.saveDealership(sorting);
     }
 
 
@@ -275,7 +275,7 @@ public class UI {
         int invIndex;
         boolean found = false;
         for(invIndex = 0;invIndex<sorting.getAllVehicles().size() && found == false;invIndex++){
-            if (sorting.getInventory().get(invIndex).getVin().equals(vin) ){
+            if (sorting.getAllVehicles().get(invIndex).getVin().equals(vin) ){
                 found =true;
 
             }
@@ -283,7 +283,7 @@ public class UI {
         if (found == false){
             System.out.println("Unable To Locate The Vehicle");
         }else{
-            contractPicker(sorting.getInventory().get(invIndex-1));
+            contractPicker(sorting.getAllVehicles().get(invIndex-1));
         }
     }
     private static void contractPicker(Vehicle vehicle){
@@ -331,9 +331,8 @@ public class UI {
         System.out.println(contract);
         String input = userInput();
         if (input.equals("y") || input.equals("yes")) {
-            ContractDataManager.saveContract(contract);
             sorting.removeVehicle(contract.getVehicleSold());
-            DealershipFileManager.saveDealership(sorting);
+
             System.out.println("*Bang* Good Job");
         } else {
             System.out.println("No Worries We Got Another |]_#@!#$ With You're Name On It");
