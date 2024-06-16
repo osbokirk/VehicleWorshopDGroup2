@@ -24,7 +24,7 @@ public class UI {
 
     public static void homeScreen(){
 
-        //sorting = DealershipFileManager.getDealership();
+        sorting = new Dealership("ABC Motors","123 Main Street, Cityville, State, 12345","5551234");
         while (true){
             System.out.println("""
                     Welcome to the ̵̴̨͚̥̙̘̫̭̥̰͓͓̩̭̙̦̩̰̟͇̼̖̺͓̰̦̪̫͎̺͚̗͔̠͚̾̉͐̒̓̽̊͐̋͋̅̓͛̊̍̓͋̂̏͑͑̆͗̔͂́̈́͜͠͝ͅDealership
